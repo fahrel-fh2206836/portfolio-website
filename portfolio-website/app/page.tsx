@@ -324,12 +324,20 @@ export default function Home() {
                     />
 
                     <ExperienceCard
-                      role="Mobile App Developer Intern"
-                      company="Example Company"
+                      role="Research Assistant"
+                      company="Qatar Research Development and Innovation Council"
                       location="Doha, Qatar"
-                      period="Jun 2025 - Present"
+                      period="Feb 2025 - Present"
                       description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
-                      logo="/logos/makira_logo_white.png"
+                      logo="/logos/qrdicouncil_logo.jpg"
+                      media={[
+                        {
+                          type: "image",
+                          src: "/experience/research-1.png",
+                          alt: "Research work visual 1",
+                          cover: true
+                        },
+                      ]}
                       highlights={[
                         "Developed and refined app screens for better user experience and performance.",
                         "Collaborated with the team to test, debug, and improve production-ready features.",
