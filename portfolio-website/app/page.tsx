@@ -149,7 +149,7 @@ export default function Home() {
         )}
       </header>
 
-      <main className="relative flex flex-col items-center px-4 pb-16 pt-4 text-center sm:px-6 md:px-10 md:pt-10">
+      <main className="relative flex flex-col items-center px-4 pb-16 pt-4 text-center sm:px-6 md:px-10 md:pt-10 gap-4">
         <section id="about" className="relative z-10 max-w-4xl">
           <RevealOnScroll>
             <p className="mb-5 text-[9px] uppercase tracking-wide pixel-font sm:text-xs">
@@ -216,61 +216,128 @@ export default function Home() {
 
                   {/* HEADER */}
                   <div className="mb-10 text-center">
-                      <div>
-                        <h2 className="mt-4 pixel-font text-lg sm:text-2xl md:text-3xl">
-                          EXPERIENCE
-                        </h2>
-                        <p className="mx-auto mt-4 max-w-2xl text-[10px] leading-6 text-[var(--muted)] sm:text-[11px] md:text-[12px]">
-                          A collection of my work experiences, internships, research, and
-                          technical contributions.
-                        </p>
-                      </div>
+                    <div>
+                      <h2 className="mt-4 pixel-font text-lg sm:text-2xl md:text-3xl">
+                        MY EXPERIENCE
+                      </h2>
+                      <p className="mx-auto mt-4 max-w-2xl text-[10px] leading-6 text-[var(--muted)] sm:text-[1em] md:text-[1em]">
+                        A collection of my work experiences, internships, and research.
+                      </p>
+                    </div>
                   </div>
 
                   {/* CARDS */}
                   <div className="mx-auto flex w-full flex-col gap-8">
 
-                      <ExperienceCard
-                        role="Mobile App Developer Intern"
-                        company="Example Company"
-                        location="Doha, Qatar"
-                        period="Jun 2025 - Aug 2025"
-                        description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
-                        logo="/logos/example.png"
-                        media={[
-                          {
-                            type: "image",
-                            src: "/experience/internship-1.png",
-                            alt: "Internship project screenshot 1",
-                          },
-                          {
-                            type: "image",
-                            src: "/experience/internship-2.png",
-                            alt: "Internship project screenshot 2",
-                          },
-                          {
-                            type: "image",
-                            src: "/experience/internship-3.png",
-                            alt: "Internship project screenshot 3",
-                          },
-                        ]}
-                      />
+                    <ExperienceCard
+                      role="Software Developer Intern"
+                      company="Makira"
+                      location="Doha, Qatar (Remote)"
+                      period="Jun 2025 - Present"
+                      description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
+                      logo="/logos/makira_logo_white.png"
+                      media={[
+                        {
+                          type: "image",
+                          src: "/experience/makira-1.webp",
+                          alt: "Makira Mobile Interface",
+                          cover: true
+                        },
+                        {
+                          type: "image",
+                          src: "/experience/makira-2.jpeg",
+                          alt: "Receving Makira Internship Certificate",
+                          cover: true
+                        },
+                      ]}
+                      highlights={[
+                        "Developed and refined app screens for better user experience and performance.",
+                        "Collaborated with the team to test, debug, and improve production-ready features.",
+                        "Contributed to discussions on UI structure, app flow, and maintainable code practices.",
+                        "Contributed to discussions on UI structure, app flow, and maintainable code practices."
+                      ]}
+                    />
 
-                      <ExperienceCard
-                        role="Research Assistant"
-                        company="Qatar University"
-                        location="Doha, Qatar"
-                        period="2024 - Present"
-                        description="Supported research activities in AI and data science by exploring ideas, implementing experiments, and contributing to technical analysis."
-                        logo="/logos/example.png"
-                        media={[
-                          {
-                            type: "image",
-                            src: "/experience/research-1.png",
-                            alt: "Research work visual 1",
-                          },
-                        ]}
-                      />
+                    <ExperienceCard
+                      role="Summer Research Intern"
+                      company="Qatar University"
+                      location="Doha, Qatar"
+                      period="May 2025 - June 2025"
+                      description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
+                      logo="/logos/Qatar_University_logo.svg.png"
+                      media={[
+                        {
+                          type: "image",
+                          src: "/experience/qusrip-1.png",
+                          alt: "Research Methodology & Results",
+                          cover: false
+                        },
+                        {
+                          type: "image",
+                          src: "/experience/qusrip-2.png",
+                          alt: "Capturing photos in real settings for dataset curation",
+                          cover: true
+                        },
+                        {
+                          type: "image",
+                          src: "/experience/qusrip-3.jpg",
+                          alt: "Award Ceremony",
+                          cover: true
+                        },
+                        {
+                          type: "image",
+                          src: "/experience/qusrip-4.jpg",
+                          alt: "Awarded for 'Best QU SRIP Research Project in IT'",
+                          cover: true
+                        },
+
+                      ]}
+                      highlights={[
+                        "Developed and refined app screens for better user experience and performance.",
+                        "Collaborated with the team to test, debug, and improve production-ready features.",
+                        "Contributed to discussions on UI structure, app flow, and maintainable code practices.",
+                        "Contributed to discussions on UI structure, app flow, and maintainable code practices."
+                      ]}
+                    />
+
+                    <ExperienceCard
+                      role="Research Assistant"
+                      company="Qatar University"
+                      location="Doha, Qatar"
+                      period="Oct 2025 - Present"
+                      description="Supported research activities in AI and data science by exploring ideas, implementing experiments, and contributing to technical analysis."
+                      logo="/logos/Qatar_University_logo.svg.png"
+                      media={[
+                        {
+                          type: "image",
+                          src: "/experience/research-1.png",
+                          alt: "Research work visual 1",
+                          cover: true
+                        },
+                      ]}
+                      highlights={[
+                        "Helped investigate machine learning and data-driven approaches for research problems.",
+                        "Assisted in implementation, testing, and documentation of experimental workflows.",
+                        "Worked on strengthening technical and analytical skills through hands-on projects.",
+                        "Worked on strengthening technical and analytical skills through hands-on projects."  
+                      ]}
+                    />
+
+                    <ExperienceCard
+                      role="Mobile App Developer Intern"
+                      company="Example Company"
+                      location="Doha, Qatar"
+                      period="Jun 2025 - Present"
+                      description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
+                      logo="/logos/makira_logo_white.png"
+                      highlights={[
+                        "Developed and refined app screens for better user experience and performance.",
+                        "Collaborated with the team to test, debug, and improve production-ready features.",
+                        "Contributed to discussions on UI structure, app flow, and maintainable code practices.",
+                        "Contributed to discussions on UI structure, app flow, and maintainable code practices."
+                      ]}
+                    />
+
                   </div>
                 </div>
               </div>

@@ -15,7 +15,7 @@
   --header-overlay: rgba(245, 161, 83, 0.8);
   --active-nav: #f5cf53;
 
-  --section-alt: #f7f1e8;
+  --section-alt: rgb(248, 203, 145);
   --section-alt-foreground: #1b1a17;
 }
 
@@ -28,7 +28,7 @@
   --card-foreground: #f3e7c9;
   --accent: #d9a441;
   --accent-foreground: #000000;
-  --accent-soft: #6f8f7a;
+  --accent-soft: #4f5752;
   --accent-soft-foreground: #111111;
   --muted: #d8ccb2;
   --header-overlay: rgba(27, 26, 23, 0.8);
