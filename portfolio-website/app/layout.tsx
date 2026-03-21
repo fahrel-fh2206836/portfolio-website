@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProviders } from "./providers/theme_provider";
 
 export const metadata: Metadata = {
   title: "Fahrel Azki | Portfolio",
@@ -15,9 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+      `}</style>
+      </head>
       <body>
-        {children}
+        <ThemeProviders>{children}</ThemeProviders>
       </body>
     </html>
   );

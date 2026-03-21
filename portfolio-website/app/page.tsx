@@ -1,49 +1,27 @@
-'use client'
-import { useState, useEffect } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { FaGithub, FaMoon } from "react-icons/fa";
 import { IoSunnySharp } from "react-icons/io5";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { RiArrowRightUpLine } from "react-icons/ri";
+import ExperienceCard from "./components/experience_card";
+import RevealOnScroll from "./components/reveal_on_scroll";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
+  const [mounted, setMounted] = useState(false);
 
-  const theme = darkMode
-    ? {
-      page: "bg-[#1b1a17] text-[#f3e7c9]",
-      nav: "bg-[#2b2a26] text-[#f3e7c9]",
-      card: "bg-[#312f2a] text-[#f3e7c9]",
-      accent: "bg-[#d9a441] text-black",
-      accentSoft: "bg-[#6f8f7a] text-[#111111]",
-      muted: "text-[#d8ccb2]",
-      deco: "bg-[#2d3b52]",
-      border: "#000",
-      accentColor: "#d9a441"
-    }
-    : {
-      page: "bg-[#cf7a43] text-black",
-      nav: "bg-[#222222] text-white",
-      card: "bg-[#f3c09a] text-black",
-      accent: "bg-[#f5cf53] text-black",
-      accentSoft: "bg-[#f0d8c3] text-black",
-      muted: "text-[#2c2118]",
-      deco: "bg-[#f5cf53]",
-      border: "#000",
-      accentColor: "#f5cf53"
-    };
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const navItems = ["About", "Experience", "Projects", "Skills", "Contact"];
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "dark") setDarkMode(true);
+    setMounted(true);
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
-  }, [darkMode]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,25 +50,25 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <div className={`min-h-screen transition-colors duration-200 ${theme.page}`}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        .pixel-font { font-family: 'Press Start 2P', system-ui, monospace; }
-        .pixel-border { box-shadow: 6px 6px 0 #000; border: 4px solid #000; }
-        .pixel-border-sm { box-shadow: 4px 4px 0 #000; border: 4px solid #000; }
-        .pixel-panel { border: 4px solid #000; box-shadow: 6px 6px 0 #000; }
-        .pixel-btn { border: 4px solid #000; box-shadow: 4px 4px 0 #000; transition: transform .15s ease, box-shadow .15s ease; }
-        .pixel-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
-      `}</style>
+  const toggleTheme = () => {
+    if (!mounted) return;
+    setTheme(isDark ? "light" : "dark");
+  };
 
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-200">
       <header
-        className={`sticky top-0 z-50 px-4 py-4 sm:px-6 md:px-10 backdrop-blur ${darkMode ? "bg-[#1b1a17]/80" : "bg-[#cf7a43]/80"
-          }`}
+        className="sticky top-0 z-50 px-4 py-4 backdrop-blur sm:px-6 md:px-10"
+        style={{ backgroundColor: "var(--header-overlay)" }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           <div className="flex items-center gap-3 pixel-font text-[9px] sm:text-xs">
-            <div className={`grid h-10 w-10 place-items-center border-4 border-black shadow-[4px_4px_0_#000] ${theme.accent}`}>
+            <div className="grid h-10 w-10 place-items-center border-4 border-black bg-[var(--accent)] text-[var(--accent-foreground)] shadow-[4px_4px_0_#000]">
               <span>FA</span>
             </div>
             <div className="leading-tight">
@@ -99,42 +77,41 @@ export default function Home() {
             </div>
           </div>
 
-          <nav className={`hidden md:flex pixel-panel rounded-none px-4 py-3 ${theme.nav}`}>
+          <nav className="hidden rounded-none bg-[var(--nav)] px-4 py-3 text-[var(--nav-foreground)] pixel-panel md:flex">
             <ul className="flex items-center gap-8 pixel-font text-[10px]">
-              {navItems.map((item) => (
-                <li
-                  key={item}
-                  onClick={() => {
-                    document
-                      .getElementById(item.toLowerCase())
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className={`cursor-pointer transition-all ${activeSection === item.toLowerCase()
-                    ? darkMode
-                      ? "text-[#d9a441] border-b-2 border-[#d9a441]"
-                      : "text-[#f5cf53] border-b-2 border-[#f5cf53]"
-                    : "hover:opacity-80"
-                    }`}
-                >
-                  {item}
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const sectionId = item.toLowerCase();
+                const isActive = activeSection === sectionId;
+
+                return (
+                  <li
+                    key={item}
+                    onClick={() => scrollToSection(sectionId)}
+                    className={`cursor-pointer transition-all ${isActive
+                      ? "border-b-2 border-[var(--active-nav)] text-[var(--active-nav)]"
+                      : "hover:opacity-80"
+                      }`}
+                  >
+                    {item}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
           <div className="hidden md:block">
             <button
-              onClick={() => setDarkMode((v) => !v)}
-              className={`pixel-btn flex items-center gap-2 px-4 py-3 pixel-font text-[10px] ${theme.accent}`}
+              onClick={toggleTheme}
+              className="pixel-btn flex items-center gap-2 bg-[var(--accent)] px-4 py-3 text-[var(--accent-foreground)] pixel-font text-[10px]"
             >
-              {darkMode ? <IoSunnySharp size={14} /> : <FaMoon size={14} />}
-              {darkMode ? "Light" : "Dark"}
+              {mounted && isDark ? <IoSunnySharp size={14} /> : <FaMoon size={14} />}
+              {mounted && isDark ? "Light" : "Dark"}
             </button>
           </div>
 
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            className={`pixel-btn md:hidden p-3 ${theme.accent}`}
+            className="pixel-btn bg-[var(--accent)] p-3 text-[var(--accent-foreground)] md:hidden"
             aria-label="Toggle menu"
           >
             {menuOpen ? <IoMdClose size={18} /> : <IoMdMenu size={18} />}
@@ -142,70 +119,163 @@ export default function Home() {
         </div>
 
         {menuOpen && (
-          <div className={`pixel-panel mt-4 md:hidden ${theme.nav} transition-all duration-200`}>
-            <div className="flex flex-col gap-4 px-4 py-4">
-              {navItems.map((item) => (
+          <div className="absolute left-0 right-0 top-full z-50 mt-2 px-4 sm:px-6 md:hidden">
+            <div className="pixel-panel bg-[var(--nav)] text-[var(--nav-foreground)]">
+              <div className="flex flex-col gap-4 px-4 py-4">
+                {navItems.map((item) => {
+                  const sectionId = item.toLowerCase();
+
+                  return (
+                    <button
+                      key={item}
+                      className="text-left text-[10px] uppercase pixel-font"
+                      onClick={() => scrollToSection(sectionId)}
+                    >
+                      {item}
+                    </button>
+                  );
+                })}
+
                 <button
-                  key={item}
-                  className="pixel-font text-left text-[10px] uppercase"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={toggleTheme}
+                  className="pixel-btn mt-2 flex items-center justify-center gap-2 bg-[var(--accent)] px-4 py-3 text-[var(--accent-foreground)] pixel-font text-[10px]"
                 >
-                  {item}
+                  {mounted && isDark ? <IoSunnySharp size={14} /> : <FaMoon size={14} />}
+                  {mounted && isDark ? "Light Mode" : "Dark Mode"}
                 </button>
-              ))}
-              <button
-                onClick={() => setDarkMode((v) => !v)}
-                className={`pixel-btn mt-2 flex items-center justify-center gap-2 px-4 py-3 pixel-font text-[10px] ${theme.accent}`}
-              >
-                {darkMode ? <IoSunnySharp size={14} /> : <FaMoon size={14} />}
-                {darkMode ? "Light Mode" : "Dark Mode"}
-              </button>
+              </div>
             </div>
           </div>
         )}
       </header>
 
-      <main className="relative mx-auto flex max-w-7xl flex-col items-center px-4 pb-16 pt-4 text-center sm:px-6 md:px-10 md:pt-10">
-        <section id="about" className="relative z-10 max-w-4xl" >
-          <p className="pixel-font mb-5 text-[9px] uppercase tracking-wide sm:text-xs">
-            CS Senior Student • Developer • Researcher
-          </p>
+      <main className="relative flex flex-col items-center px-4 pb-16 pt-4 text-center sm:px-6 md:px-10 md:pt-10">
+        <section id="about" className="relative z-10 max-w-4xl">
+          <RevealOnScroll>
+            <p className="mb-5 text-[9px] uppercase tracking-wide pixel-font sm:text-xs">
+              CS Senior Student • Developer • Researcher
+            </p>
 
-          <h1 className="pixel-font text-lg leading-[1.8] sm:text-2xl md:text-4xl">
-            HELLO! I AM
-            <br />
-            FAHREL AZKI HIDAYAT
-            <br />
-          </h1>
+            <h1 className="text-lg leading-[1.8] pixel-font sm:text-2xl md:text-4xl">
+              HELLO! I AM
+              <br />
+              FAHREL AZKI HIDAYAT
+              <br />
+            </h1>
 
-          <p className={`mx-auto mt-6 max-w-2xl leading-7 text-[9px] sm:text-[11px] md:text-[13px] lg:text-[14px] pixel-font ${theme.muted}`}>
-            I am a senior Computer Science student at Qatar University with experience in building mobile and web applications. I am also an AI and Data Science enthusiast, actively expanding my skill set through research and project-based learning
-          </p>
+            <p className="mx-auto mt-6 max-w-2xl text-[9px] leading-7 text-[var(--muted)] pixel-font sm:text-[11px] md:text-[13px] lg:text-[14px]">
+              I am a senior Computer Science student at Qatar University with
+              experience in building mobile and web applications. I am also an AI
+              and Data Science enthusiast, actively expanding my skill set through
+              research and project-based learning!
+            </p>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-10 sm:flex-row">
-            <a
-              href="https://drive.google.com/file/d/15FXxH7wht2vacAsWYlqB3a0BlpTrZF2T/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`pixel-btn w-full max-w-[260px] px-8 py-4 pixel-font text-[10px] sm:w-auto flex items-center justify-center gap-2 ${theme.accent}`}
-            >
-              View Resume
-              <RiArrowRightUpLine size={20} />
-            </a>
-            <a
-              href="https://github.com/fahrel-fh2206836"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`pixel-btn w-full max-w-[260px] px-8 py-4 pixel-font text-[10px] sm:w-auto flex items-center justify-center gap-4 ${theme.accentSoft}`}
-            >
-              <FaGithub size={20} />
-              Visit Github
-            </a>
-          </div>
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-10 sm:flex-row">
+              <a
+                href="https://drive.google.com/file/d/15FXxH7wht2vacAsWYlqB3a0BlpTrZF2T/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pixel-btn flex w-full max-w-[260px] items-center justify-center gap-2 bg-[var(--accent)] px-8 py-4 text-[10px] text-[var(--accent-foreground)] pixel-font sm:w-auto"
+              >
+                View Resume
+                <RiArrowRightUpLine size={20} />
+              </a>
+
+              <a
+                href="https://github.com/fahrel-fh2206836"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pixel-btn flex w-full max-w-[260px] items-center justify-center gap-4 bg-[var(--accent-soft)] px-8 py-4 text-[10px] text-[var(--accent-soft-foreground)] pixel-font sm:w-auto"
+              >
+                <FaGithub size={20} />
+                Visit Github
+              </a>
+            </div>
+          </RevealOnScroll>
         </section>
 
-        <section id="experience" className="relative z-10 max-w-4xl">
+        <section
+          id="experience"
+          className="relative z-10 mt-10 w-full"
+        >
+          <RevealOnScroll>
 
+            {/* BOOK CONTAINER */}
+            <div className="relative mx-auto w-full max-w-7xl">
+
+              {/* Shadow (depth effect) */}
+              <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black"></div>
+
+              {/* Main "page" */}
+              <div className="relative border-4 border-black bg-[var(--section-alt)] p-6 sm:p-10">
+
+                {/* LEFT SPINE */}
+                <div className="absolute left-0 top-0 h-full w-3 bg-black"></div>
+
+                <div className="pl-4">
+
+                  {/* HEADER */}
+                  <div className="mb-10 text-center">
+                      <div>
+                        <h2 className="mt-4 pixel-font text-lg sm:text-2xl md:text-3xl">
+                          EXPERIENCE
+                        </h2>
+                        <p className="mx-auto mt-4 max-w-2xl text-[10px] leading-6 text-[var(--muted)] sm:text-[11px] md:text-[12px]">
+                          A collection of my work experiences, internships, research, and
+                          technical contributions.
+                        </p>
+                      </div>
+                  </div>
+
+                  {/* CARDS */}
+                  <div className="mx-auto flex w-full flex-col gap-8">
+
+                      <ExperienceCard
+                        role="Mobile App Developer Intern"
+                        company="Example Company"
+                        location="Doha, Qatar"
+                        period="Jun 2025 - Aug 2025"
+                        description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
+                        logo="/logos/example.png"
+                        media={[
+                          {
+                            type: "image",
+                            src: "/experience/internship-1.png",
+                            alt: "Internship project screenshot 1",
+                          },
+                          {
+                            type: "image",
+                            src: "/experience/internship-2.png",
+                            alt: "Internship project screenshot 2",
+                          },
+                          {
+                            type: "image",
+                            src: "/experience/internship-3.png",
+                            alt: "Internship project screenshot 3",
+                          },
+                        ]}
+                      />
+
+                      <ExperienceCard
+                        role="Research Assistant"
+                        company="Qatar University"
+                        location="Doha, Qatar"
+                        period="2024 - Present"
+                        description="Supported research activities in AI and data science by exploring ideas, implementing experiments, and contributing to technical analysis."
+                        logo="/logos/example.png"
+                        media={[
+                          {
+                            type: "image",
+                            src: "/experience/research-1.png",
+                            alt: "Research work visual 1",
+                          },
+                        ]}
+                      />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </RevealOnScroll>
         </section>
       </main>
     </div>

@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5a153;
+  --foreground: #000000;
+  --nav: #222222;
+  --nav-foreground: #ffffff;
+  --card: #f3c09a;
+  --card-foreground: #000000;
+  --accent: #f5cf53;
+  --accent-foreground: #000000;
+  --accent-soft: #f0d8c3;
+  --accent-soft-foreground: #000000;
+  --muted: #2c2118;
+  --header-overlay: rgba(245, 161, 83, 0.8);
+  --active-nav: #f5cf53;
+
+  --section-alt: #f7f1e8;
+  --section-alt-foreground: #1b1a17;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: #1b1a17;
+  --foreground: #f3e7c9;
+  --nav: #2b2a26;
+  --nav-foreground: #f3e7c9;
+  --card: #312f2a;
+  --card-foreground: #f3e7c9;
+  --accent: #d9a441;
+  --accent-foreground: #000000;
+  --accent-soft: #6f8f7a;
+  --accent-soft-foreground: #111111;
+  --muted: #d8ccb2;
+  --header-overlay: rgba(27, 26, 23, 0.8);
+  --active-nav: #d9a441;
+
+  --section-alt: #24231f;
+  --section-alt-foreground: #f3e7c9;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.pixel-font {
+  font-family: "Press Start 2P", system-ui, monospace;
+}
+
+.pixel-border {
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #000;
+}
+
+.pixel-border-sm {
+  border: 4px solid #000;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.pixel-panel {
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #000;
+}
+
+.pixel-btn {
+  border: 4px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.pixel-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
