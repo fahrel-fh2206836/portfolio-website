@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 export default function ScrollToTop() {
     const [progress, setProgress] = useState(0);
     const [visible, setVisible] = useState(false);
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === "dark";
 
     useEffect(() => {
         const onScroll = () => {
@@ -74,7 +77,7 @@ export default function ScrollToTop() {
                         width: `${size}px`,
                         height: `${size}px`,
                         borderRadius: "50%",
-                        background: "var(--muted)",
+                        background: isDark ? "transparent" : "var(--muted)",
                         border: "none",
                         boxShadow: "none",
                         cursor: "pointer",
