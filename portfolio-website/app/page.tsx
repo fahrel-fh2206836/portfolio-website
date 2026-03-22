@@ -8,6 +8,7 @@ import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import ExperienceCard from "./components/experience_card";
 import RevealOnScroll from "./components/reveal_on_scroll";
+import ScrollToTop from "./components/scroll_top_btn";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -354,6 +355,10 @@ export default function Home() {
           </section>
         </RevealOnScroll>
       </main>
+
+      <aside>
+        <ScrollToTop/>
+      </aside>
     </div>
   );
 }

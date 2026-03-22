@@ -33,31 +33,51 @@ export default function ExperienceCard({
 }: ExperienceCardProps) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [prevIndex, setPrevIndex] = useState<number | null>(null);
     const [highlightsOpen, setHighlightsOpen] = useState(false);
+    const [slideDirection, setSlideDirection] = useState<"left" | "right">("left");
+    const [isAnimating, setIsAnimating] = useState(false);
     const touchStartX = useRef<number | null>(null);
     const touchEndX = useRef<number | null>(null);
 
     const hasMedia = media && media.length > 0;
 
+    const goTo = (newIndex: number, direction: "left" | "right") => {
+        if (isAnimating || newIndex === currentIndex) return;
+        setSlideDirection(direction);
+        setPrevIndex(currentIndex);
+        setCurrentIndex(newIndex);
+        setIsAnimating(true);
+        setTimeout(() => {
+            setPrevIndex(null);
+            setIsAnimating(false);
+        }, 350);
+    };
+
     const next = () => {
         if (!hasMedia) return;
-        setCurrentIndex((prev) => (prev + 1) % media.length);
+        goTo((currentIndex + 1) % media.length, "left");
     };
 
     const prev = () => {
         if (!hasMedia) return;
-        setCurrentIndex((prev) => (prev - 1 + media.length) % media.length);
+        goTo((currentIndex - 1 + media.length) % media.length, "right");
+    };
+
+    const goToIndex = (index: number) => {
+        if (index === currentIndex || isAnimating) return;
+        goTo(index, index > currentIndex ? "left" : "right");
     };
 
     useEffect(() => {
         if (!hasMedia || media.length <= 1) return;
-
         const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % media.length);
-        }, 7500);
-
+            if (!isAnimating) {
+                goTo((currentIndex + 1) % media.length, "left");
+            }
+        }, 3000);
         return () => clearInterval(interval);
-    }, [hasMedia, media.length]);
+    }, [hasMedia, media.length, currentIndex, isAnimating]);
 
     const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
         touchStartX.current = e.touches[0].clientX;
@@ -70,21 +90,30 @@ export default function ExperienceCard({
 
     const handleTouchEnd = () => {
         if (touchStartX.current === null || touchEndX.current === null) return;
-
         const distance = touchStartX.current - touchEndX.current;
         const minSwipeDistance = 50;
-
-        if (distance > minSwipeDistance) {
-            next();
-        } else if (distance < -minSwipeDistance) {
-            prev();
-        }
-
+        if (distance > minSwipeDistance) next();
+        else if (distance < -minSwipeDistance) prev();
         touchStartX.current = null;
         touchEndX.current = null;
     };
 
+    // Slide animation styles
+    const enterFrom = slideDirection === "left" ? "100%" : "-100%";
+    const exitTo = slideDirection === "left" ? "-100%" : "100%";
+
     return (
+        <>
+        <style>{`
+            @keyframes ec-slide-in {
+                from { transform: translateX(var(--ec-enter-from)); }
+                to   { transform: translateX(0); }
+            }
+            @keyframes ec-slide-out {
+                from { transform: translateX(0); }
+                to   { transform: translateX(var(--ec-exit-to)); }
+            }
+        `}</style>
         <article className="pixel-panel bg-[var(--card)] p-4 text-[var(--card-foreground)] sm:p-5 md:p-6">
             <div className="flex flex-col gap-4">
                 {/* Top header */}
@@ -148,13 +177,39 @@ export default function ExperienceCard({
                                     </p>
                                 </div>
 
-                                <img
-                                    key={currentIndex}
-                                    src={media[currentIndex].src}
-                                    alt={media[currentIndex].alt}
-                                    className={`h-64 w-full select-none ${media[currentIndex].cover === true ? "object-cover" : ""} touch-pan-y sm:h-72 lg:h-[420px]`}
-                                    draggable={false}
-                                />
+                                {/* Slide container */}
+                                <div className="relative h-64 w-full overflow-hidden sm:h-72 lg:h-[420px]">
+                                    {/* Exiting image */}
+                                    {prevIndex !== null && (
+                                        <img
+                                            key={`prev-${prevIndex}`}
+                                            src={media[prevIndex].src}
+                                            alt={media[prevIndex].alt}
+                                            className={`absolute inset-0 h-full w-full select-none ${media[prevIndex].cover ? "object-cover" : ""}`}
+                                            draggable={false}
+                                            style={{
+                                                animation: "ec-slide-out 0.35s ease forwards",
+                                                ["--ec-exit-to" as string]: exitTo,
+                                            }}
+                                        />
+                                    )}
+                                    {/* Entering image */}
+                                    <img
+                                        key={`curr-${currentIndex}`}
+                                        src={media[currentIndex].src}
+                                        alt={media[currentIndex].alt}
+                                        className={`absolute inset-0 h-full w-full select-none touch-pan-y ${media[currentIndex].cover ? "object-cover" : ""}`}
+                                        draggable={false}
+                                        style={
+                                            isAnimating
+                                                ? {
+                                                    animation: "ec-slide-in 0.35s ease forwards",
+                                                    ["--ec-enter-from" as string]: enterFrom,
+                                                }
+                                                : undefined
+                                        }
+                                    />
+                                </div>
 
                                 {media.length > 1 && (
                                     <>
@@ -162,7 +217,7 @@ export default function ExperienceCard({
                                             type="button"
                                             onClick={prev}
                                             aria-label="Previous image"
-                                            className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] circular-pixel-btn"
+                                            className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] transition-transform hover:scale-105"
                                         >
                                             {"<"}
                                         </button>
@@ -171,7 +226,7 @@ export default function ExperienceCard({
                                             type="button"
                                             onClick={next}
                                             aria-label="Next image"
-                                            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] circular-pixel-btn"
+                                            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] transition-transform hover:scale-105"
                                         >
                                             {">"}
                                         </button>
@@ -181,10 +236,9 @@ export default function ExperienceCard({
                                                 <button
                                                     key={index}
                                                     type="button"
-                                                    onClick={() => setCurrentIndex(index)}
+                                                    onClick={() => goToIndex(index)}
                                                     aria-label={`Go to image ${index + 1}`}
-                                                    className={`h-3 w-3 border-2 border-black ${index === currentIndex ? "bg-[var(--card)]" : "bg-white/70"
-                                                        }`}
+                                                    className={`h-3 w-3 border-2 border-black ${index === currentIndex ? "bg-[var(--card)]" : "bg-white/70"}`}
                                                 />
                                             ))}
                                         </div>
@@ -208,20 +262,18 @@ export default function ExperienceCard({
                         {highlights && highlights.length > 0 && (
                             <div>
                                 {/* Toggle button — only visible on mobile & tablet */}
-                                {highlights.length > 0 && (
-                                    <button
-                                        type="button"
-                                        onClick={() => setHighlightsOpen((prev) => !prev)}
-                                        className="pixel-btn mb-3 flex w-full items-center justify-between bg-[var(--accent)] px-4 py-3 text-[var(--accent-foreground)] lg:hidden"
-                                    >
-                                        <span className="pixel-font text-[8px] uppercase sm:text-[9px]">
-                                            Highlights
-                                        </span>
-                                        <span className="pixel-font text-[10px] sm:text-[11px]">
-                                            {highlightsOpen ? "▲" : "▼"}
-                                        </span>
-                                    </button>
-                                )}
+                                <button
+                                    type="button"
+                                    onClick={() => setHighlightsOpen((prev) => !prev)}
+                                    className="pixel-btn mb-3 flex w-full items-center justify-between bg-[var(--accent)] px-4 py-3 text-[var(--accent-foreground)] lg:hidden"
+                                >
+                                    <span className="pixel-font text-[8px] uppercase sm:text-[9px]">
+                                        Highlights
+                                    </span>
+                                    <span className="pixel-font text-[10px] sm:text-[11px]">
+                                        {highlightsOpen ? "▲" : "▼"}
+                                    </span>
+                                </button>
 
                                 {/* Desktop: always show label */}
                                 <h4 className="mb-3 hidden pixel-font text-[9px] uppercase sm:text-[10px] lg:block">
@@ -229,9 +281,7 @@ export default function ExperienceCard({
                                 </h4>
 
                                 {/* Grid: always visible on desktop, conditionally on mobile/tablet */}
-                                <div
-                                    className={`grid gap-3 ${highlightsOpen ? "block" : "hidden"} lg:grid`}
-                                >
+                                <div className={`grid gap-3 ${highlightsOpen ? "block" : "hidden"} lg:grid`}>
                                     {highlights.map((item, index) => (
                                         <div
                                             key={index}
@@ -249,5 +299,6 @@ export default function ExperienceCard({
                 </div>
             </div>
         </article>
+        </>
     );
 }
