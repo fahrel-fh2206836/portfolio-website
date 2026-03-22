@@ -150,8 +150,8 @@ export default function Home() {
       </header>
 
       <main className="relative flex flex-col items-center px-4 pb-16 pt-4 text-center sm:px-6 md:px-10 md:pt-10 gap-4">
-        <section id="about" className="relative z-10 max-w-4xl">
-          <RevealOnScroll>
+        <RevealOnScroll>
+          <section id="about" className="relative z-10 max-w-4xl">
             <p className="mb-5 text-[9px] uppercase tracking-wide pixel-font sm:text-xs">
               CS Senior Student • Developer • Researcher
             </p>
@@ -191,14 +191,15 @@ export default function Home() {
                 Visit Github
               </a>
             </div>
-          </RevealOnScroll>
-        </section>
+          </section>
+        </RevealOnScroll>
 
-        <section
-          id="experience"
-          className="relative z-10 mt-10 w-full"
-        >
-          <RevealOnScroll>
+        <RevealOnScroll>
+          <section
+            id="experience"
+            className="relative z-10 mt-10 w-full"
+          >
+
 
             {/* BOOK CONTAINER */}
             <div className="relative mx-auto w-full max-w-7xl">
@@ -319,7 +320,7 @@ export default function Home() {
                         "Helped investigate machine learning and data-driven approaches for research problems.",
                         "Assisted in implementation, testing, and documentation of experimental workflows.",
                         "Worked on strengthening technical and analytical skills through hands-on projects.",
-                        "Worked on strengthening technical and analytical skills through hands-on projects."  
+                        "Worked on strengthening technical and analytical skills through hands-on projects."
                       ]}
                     />
 
@@ -350,8 +351,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </RevealOnScroll>
-        </section>
+          </section>
+        </RevealOnScroll>
       </main>
     </div>
   );

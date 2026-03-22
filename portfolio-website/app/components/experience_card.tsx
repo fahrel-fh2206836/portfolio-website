@@ -33,6 +33,7 @@ export default function ExperienceCard({
 }: ExperienceCardProps) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [highlightsOpen, setHighlightsOpen] = useState(false);
     const touchStartX = useRef<number | null>(null);
     const touchEndX = useRef<number | null>(null);
 
@@ -206,11 +207,31 @@ export default function ExperienceCard({
                         {/* Highlights */}
                         {highlights && highlights.length > 0 && (
                             <div>
-                                <h4 className="mb-3 pixel-font text-[9px] uppercase sm:text-[10px]">
+                                {/* Toggle button — only visible on mobile & tablet */}
+                                {highlights.length > 0 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setHighlightsOpen((prev) => !prev)}
+                                        className="pixel-btn mb-3 flex w-full items-center justify-between bg-[var(--accent)] px-4 py-3 text-[var(--accent-foreground)] lg:hidden"
+                                    >
+                                        <span className="pixel-font text-[8px] uppercase sm:text-[9px]">
+                                            Highlights
+                                        </span>
+                                        <span className="pixel-font text-[10px] sm:text-[11px]">
+                                            {highlightsOpen ? "▲" : "▼"}
+                                        </span>
+                                    </button>
+                                )}
+
+                                {/* Desktop: always show label */}
+                                <h4 className="mb-3 hidden pixel-font text-[9px] uppercase sm:text-[10px] lg:block">
                                     Highlights
                                 </h4>
 
-                                <div className="grid gap-3">
+                                {/* Grid: always visible on desktop, conditionally on mobile/tablet */}
+                                <div
+                                    className={`grid gap-3 ${highlightsOpen ? "block" : "hidden"} lg:grid`}
+                                >
                                     {highlights.map((item, index) => (
                                         <div
                                             key={index}
