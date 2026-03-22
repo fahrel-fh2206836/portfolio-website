@@ -54,7 +54,7 @@ export default function ExperienceCard({
 
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % media.length);
-        }, 3000);
+        }, 7500);
 
         return () => clearInterval(interval);
     }, [hasMedia, media.length]);
@@ -120,9 +120,9 @@ export default function ExperienceCard({
                     {/* Spacer for grid alignment */}
                     <div className="hidden md:block" />
 
-                    {/* Period */}
+                    {/* Period — full width + centered on mobile, auto on sm+ */}
                     <div className="flex justify-start md:justify-end">
-                        <div className="pixel-border-sm bg-[var(--accent)] px-3 py-2 text-[var(--accent-foreground)] sm:px-4 sm:py-3">
+                        <div className="pixel-border-sm bg-[var(--accent)] px-3 py-2 text-[var(--accent-foreground)] sm:px-4 sm:py-3 w-full sm:w-auto text-center sm:text-left">
                             <span className="pixel-font text-[8px] sm:text-[9px] md:text-[10px]">
                                 {period}
                             </span>
@@ -162,7 +162,7 @@ export default function ExperienceCard({
                                             type="button"
                                             onClick={prev}
                                             aria-label="Previous image"
-                                            className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] transition-transform hover:scale-105"
+                                            className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] circular-pixel-btn"
                                         >
                                             {"<"}
                                         </button>
@@ -171,7 +171,7 @@ export default function ExperienceCard({
                                             type="button"
                                             onClick={next}
                                             aria-label="Next image"
-                                            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] transition-transform hover:scale-105"
+                                            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] circular-pixel-btn"
                                         >
                                             {">"}
                                         </button>
@@ -245,7 +245,6 @@ export default function ExperienceCard({
                                 </div>
                             </div>
                         )}
-
                     </div>
                 </div>
             </div>

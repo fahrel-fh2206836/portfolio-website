@@ -85,6 +85,11 @@ body {
   box-shadow: 2px 2px 0 #000;
 }
 
+.circular-pixel-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000;
+}
+
 .reveal-up {
   opacity: 0;
   transform: translateY(48px);
