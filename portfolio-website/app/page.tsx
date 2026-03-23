@@ -324,10 +324,10 @@ export default function Home() {
                         },
                       ]}
                       highlights={[
-                        "Helped investigate machine learning and data-driven approaches for research problems.",
-                        "Assisted in implementation, testing, and documentation of experimental workflows.",
-                        "Worked on strengthening technical and analytical skills through hands-on projects.",
-                        "Worked on strengthening technical and analytical skills through hands-on projects."
+                        "Collected and annotated 2,000+ images for helmet detection dataset.",
+                        "Quantized 11 mobile-friendly CNN models for edge-based distraction classification and trained YOLOv11n model for helmet detection achieving a mAP@50 of 0.9733.",
+                        "Benchmarked models using accuracy and latency evaluations with the best CNN model (MobileNetV2-100) achieving 95.15% accuracy and 24.88 ms.",
+                        "Integrated trained models into an end-to-end Flutter mobile application pipeline."
                       ]}
                     />
 
