@@ -6,8 +6,12 @@ import { useTheme } from "next-themes";
 export default function ScrollToTop() {
     const [progress, setProgress] = useState(0);
     const [visible, setVisible] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const { resolvedTheme } = useTheme();
-    const isDark = resolvedTheme === "dark";
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const onScroll = () => {
@@ -32,6 +36,8 @@ export default function ScrollToTop() {
     const radius = (size - strokeWidth * 2) / 2;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference * (1 - progress);
+
+    const isDark = mounted && resolvedTheme === "dark";
 
     return (
         <>
@@ -77,7 +83,7 @@ export default function ScrollToTop() {
                         width: `${size}px`,
                         height: `${size}px`,
                         borderRadius: "50%",
-                        background: isDark ? "transparent" : "var(--muted)",
+                        background: !mounted ? "transparent" : isDark ? "transparent" : "var(--muted)",
                         border: "none",
                         boxShadow: "none",
                         cursor: "pointer",
@@ -124,7 +130,7 @@ export default function ScrollToTop() {
                         />
                     </svg>
 
-                    {/* Arrow icon — upward chevron */}
+                    {/* Arrow icon */}
                     <svg
                         width="18"
                         height="18"

@@ -75,7 +75,7 @@ export default function ExperienceCard({
             if (!isAnimating) {
                 goTo((currentIndex + 1) % media.length, "left");
             }
-        }, 3000);
+        }, 7500);
         return () => clearInterval(interval);
     }, [hasMedia, media.length, currentIndex, isAnimating]);
 
@@ -171,7 +171,7 @@ export default function ExperienceCard({
                                 onTouchEnd={handleTouchEnd}
                             >
                                 {/* Top caption */}
-                                <div className="absolute top-0 left-0 z-10 w-full border-b-2 border-black bg-black/50 px-4 py-2">
+                                <div className="absolute top-0 left-0 z-10 w-full bg-black/50 px-4 py-2">
                                     <p className="text-center text-[10px] text-white sm:text-[11px] md:text-xs text-left">
                                         {media[currentIndex].alt}
                                     </p>
@@ -217,7 +217,7 @@ export default function ExperienceCard({
                                             type="button"
                                             onClick={prev}
                                             aria-label="Previous image"
-                                            className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] transition-transform hover:scale-105"
+                                            className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] circular-pixel-btn"
                                         >
                                             {"<"}
                                         </button>
@@ -226,7 +226,7 @@ export default function ExperienceCard({
                                             type="button"
                                             onClick={next}
                                             aria-label="Next image"
-                                            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] transition-transform hover:scale-105"
+                                            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-[var(--card)] pixel-font text-sm shadow-[2px_2px_0px_black] circular-pixel-btn"
                                         >
                                             {">"}
                                         </button>

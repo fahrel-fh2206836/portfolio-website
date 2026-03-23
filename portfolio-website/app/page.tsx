@@ -236,7 +236,7 @@ export default function Home() {
                       company="Makira"
                       location="Doha, Qatar (Remote)"
                       period="Jun 2025 - Present"
-                      description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
+                      description="Contributed to the end-to-end development of a production mobile application, from engineering the architecture and backend infrastructure to cross-platform delivery and quality assurance that aligns with the company's product requirements."
                       logo="/logos/makira_logo_white.png"
                       media={[
                         {
@@ -248,15 +248,15 @@ export default function Home() {
                         {
                           type: "image",
                           src: "/experience/makira-2.jpeg",
-                          alt: "Receving Makira Internship Certificate",
+                          alt: "Receiving Makira Internship Certificate",
                           cover: true
                         },
                       ]}
                       highlights={[
-                        "Developed and refined app screens for better user experience and performance.",
-                        "Collaborated with the team to test, debug, and improve production-ready features.",
-                        "Contributed to discussions on UI structure, app flow, and maintainable code practices.",
-                        "Contributed to discussions on UI structure, app flow, and maintainable code practices."
+                        "Developed cross-platform Flutter application with English and Arabic localization.",
+                        "Engineered secure Supabase backend with PostgreSQL, storage, authentication, and edge functions for production and development environments.",
+                        "Conducted functional testing on Android and iOS platforms.",
+
                       ]}
                     />
 
@@ -295,10 +295,10 @@ export default function Home() {
 
                       ]}
                       highlights={[
-                        "Developed and refined app screens for better user experience and performance.",
-                        "Collaborated with the team to test, debug, and improve production-ready features.",
-                        "Contributed to discussions on UI structure, app flow, and maintainable code practices.",
-                        "Contributed to discussions on UI structure, app flow, and maintainable code practices."
+                        "Conducted a comprehensive literature review on motorcycle safety, mobile phone distraction, and computer vision approaches.",
+                        " Built a curated dataset of 1,799 images (balanced between looking and not looking) from volunteers and public sources; applied preprocessing (resizing, cropping, augmentation).",
+                        "Trained CNN models (GhostNet, MobileNet, EfficientNet) using PyTorch achieving 95% accuracy.",
+                        "Awarded Best Research Project in IT – QU SRIP 2025. 🏆🎉"
                       ]}
                     />
 
@@ -312,9 +312,15 @@ export default function Home() {
                       media={[
                         {
                           type: "image",
-                          src: "/experience/research-1.png",
-                          alt: "Research work visual 1",
-                          cover: true
+                          src: "/experience/qura-1.png",
+                          alt: "Helmet-Pose Distraction Classification App",
+                          cover: false
+                        },
+                        {
+                          type: "image",
+                          src: "/experience/qura-2.png",
+                          alt: "Accuracy-Latency tradeoff on CNN models",
+                          cover: false
                         },
                       ]}
                       highlights={[
@@ -335,8 +341,8 @@ export default function Home() {
                       media={[
                         {
                           type: "image",
-                          src: "/experience/research-1.png",
-                          alt: "Research work visual 1",
+                          src: "/experience/urep-1.jpeg",
+                          alt: "Driving simulator used for user study",
                           cover: true
                         },
                       ]}
