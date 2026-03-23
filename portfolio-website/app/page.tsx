@@ -265,7 +265,7 @@ export default function Home() {
                       company="Qatar University"
                       location="Doha, Qatar"
                       period="May 2025 - June 2025"
-                      description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
+                      description="Conducted research on motorcycle safety and rider distraction, exploring computer vision-based approaches and data-driven analysis. Contributed to dataset development, model experimentation, and overall research findings."
                       logo="/logos/Qatar_University_logo.svg.png"
                       media={[
                         {
@@ -294,11 +294,10 @@ export default function Home() {
                         },
 
                       ]}
-                      highlights={[
-                        "Conducted a comprehensive literature review on motorcycle safety, mobile phone distraction, and computer vision approaches.",
+                      highlights={["Conducted a comprehensive literature review on motorcycle safety, mobile phone distraction, and computer vision approaches.",
                         " Built a curated dataset of 1,799 images (balanced between looking and not looking) from volunteers and public sources; applied preprocessing (resizing, cropping, augmentation).",
                         "Trained CNN models (GhostNet, MobileNet, EfficientNet) using PyTorch achieving 95% accuracy.",
-                        "Awarded Best Research Project in IT – QU SRIP 2025. 🏆🎉"
+                        "Awarded Best Research Project in IT – QU SRIP 2025.",
                       ]}
                     />
 
@@ -307,7 +306,7 @@ export default function Home() {
                       company="Qatar University"
                       location="Doha, Qatar"
                       period="Oct 2025 - Present"
-                      description="Supported research activities in AI and data science by exploring ideas, implementing experiments, and contributing to technical analysis."
+                      description="Continued working on completing and advancing the summer research internship project."
                       logo="/logos/Qatar_University_logo.svg.png"
                       media={[
                         {
@@ -336,7 +335,7 @@ export default function Home() {
                       company="Qatar Research Development and Innovation Council"
                       location="Doha, Qatar"
                       period="Feb 2025 - Present"
-                      description="Worked on building and improving mobile application features, collaborating with designers and developers to create user-friendly and scalable solutions."
+                      description="Contributing to UREP Cycle 32 road safety study: “Signaling Intent: A Study on Turn Signal Usage and Its Impact on Road Safety.”"
                       logo="/logos/qrdicouncil_logo.jpg"
                       media={[
                         {
@@ -347,10 +346,7 @@ export default function Home() {
                         },
                       ]}
                       highlights={[
-                        "Developed and refined app screens for better user experience and performance.",
-                        "Collaborated with the team to test, debug, and improve production-ready features.",
-                        "Contributed to discussions on UI structure, app flow, and maintainable code practices.",
-                        "Contributed to discussions on UI structure, app flow, and maintainable code practices."
+                        "Conducted a comprehensive literature review on the importance of signaling and turn signal neglect (TSN) in crash data, including an analysis of global turn signal usage patterns. Explored existing research on TSN using driving simulators, with a focus on methodologies for leveraging simulation environments in behavioral analysis studies.",
                       ]}
                     />
 
