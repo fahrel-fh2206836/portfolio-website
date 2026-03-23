@@ -253,10 +253,9 @@ export default function Home() {
                         },
                       ]}
                       highlights={[
-                        "Developed cross-platform Flutter application with English and Arabic localization.",
-                        "Engineered secure Supabase backend with PostgreSQL, storage, authentication, and edge functions for production and development environments.",
-                        "Conducted functional testing on Android and iOS platforms.",
-
+                        { text: "Developed cross-platform Flutter application with English and Arabic localization." },
+                        { text: "Engineered secure Supabase backend with PostgreSQL, storage, authentication, and edge functions for production and development environments." },
+                        { text: "Conducted functional testing on Android and iOS platforms." },
                       ]}
                     />
 
@@ -294,10 +293,10 @@ export default function Home() {
                         },
 
                       ]}
-                      highlights={["Conducted a comprehensive literature review on motorcycle safety, mobile phone distraction, and computer vision approaches.",
-                        " Built a curated dataset of 1,799 images (balanced between looking and not looking) from volunteers and public sources; applied preprocessing (resizing, cropping, augmentation).",
-                        "Trained CNN models (GhostNet, MobileNet, EfficientNet) using PyTorch achieving 95% accuracy.",
-                        "Awarded Best Research Project in IT – QU SRIP 2025.",
+                      highlights={[{ text: "Conducted a comprehensive literature review on motorcycle safety, mobile phone distraction, and computer vision approaches." },
+                      { text: "Built a curated dataset of 1,799 images (balanced between looking and not looking) from volunteers and public sources; applied preprocessing (resizing, cropping, augmentation)." },
+                      { text: "Trained CNN models (GhostNet, MobileNet, EfficientNet) using PyTorch achieving 95% accuracy." },
+                      { text: "Awarded Best Research Project in IT – QU SRIP 2025.", celebrate: true },
                       ]}
                     />
 
@@ -323,10 +322,10 @@ export default function Home() {
                         },
                       ]}
                       highlights={[
-                        "Collected and annotated 2,000+ images for helmet detection dataset.",
-                        "Quantized 11 mobile-friendly CNN models for edge-based distraction classification and trained YOLOv11n model for helmet detection achieving a mAP@50 of 0.9733.",
-                        "Benchmarked models using accuracy and latency evaluations with the best CNN model (MobileNetV2-100) achieving 95.15% accuracy and 24.88 ms.",
-                        "Integrated trained models into an end-to-end Flutter mobile application pipeline."
+                        { text: "Collected and annotated 2,000+ images for helmet detection dataset." },
+                        { text: "Quantized 11 mobile-friendly CNN models for edge-based distraction classification and trained YOLOv11n model for helmet detection achieving a mAP@50 of 0.9733." },
+                        { text: "Benchmarked models using accuracy and latency evaluations with the best CNN model (MobileNetV2-100) achieving 95.15% accuracy and 24.88 ms." },
+                        { text: "Integrated trained models into an end-to-end Flutter mobile application pipeline." }
                       ]}
                     />
 
@@ -346,7 +345,7 @@ export default function Home() {
                         },
                       ]}
                       highlights={[
-                        "Conducted a comprehensive literature review on the importance of signaling and turn signal neglect (TSN) in crash data, including an analysis of global turn signal usage patterns. Explored existing research on TSN using driving simulators, with a focus on methodologies for leveraging simulation environments in behavioral analysis studies.",
+                        { text: "Conducted a comprehensive literature review on the importance of signaling and turn signal neglect (TSN) in crash data, including an analysis of global turn signal usage patterns. Explored existing research on TSN using driving simulators, with a focus on methodologies for leveraging simulation environments in behavioral analysis studies." },
                       ]}
                     />
 
@@ -359,7 +358,7 @@ export default function Home() {
       </main>
 
       <aside>
-        <ScrollToTop/>
+        <ScrollToTop />
       </aside>
     </div>
   );
