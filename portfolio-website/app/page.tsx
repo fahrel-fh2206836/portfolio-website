@@ -9,6 +9,7 @@ import { RiArrowRightUpLine } from "react-icons/ri";
 import ExperienceCard from "./components/experience_card";
 import RevealOnScroll from "./components/reveal_on_scroll";
 import ScrollToTop from "./components/scroll_top_btn";
+import ProjectCard from "./components/project_card";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -352,6 +353,73 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <section id="projects" className="relative z-10 mt-24 w-full max-w-6xl mx-auto px-4">
+            {/* HEADER */}
+            <div className="mb-12 text-center">
+              <p className="pixel-font text-[10px] uppercase tracking-widest mb-4">
+                PROJECTS.LOG
+              </p>
+
+              <h2 className="pixel-font text-xl sm:text-2xl leading-snug">
+                FEATURED <br />
+                <span style={{ color: "var(--accent)" }}>PROJECTS</span>
+              </h2>
+            </div>
+
+            {/* ✅ GRID WRAPPER */}
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <ProjectCard
+                title="PORTFOLIO WEBSITE"
+                description="Personal portfolio built with Next.js, Tailwind, and custom pixel UI design system."
+                image="/projects/project3.png"
+                tags={["NEXT.JS", "TAILWIND"]}
+                link="#"
+              />
+
+              <ProjectCard
+                title="PORTFOLIO WEBSITE"
+                description="Personal portfolio built with Next.js, Tailwind, and custom pixel UI design system."
+                image="/projects/project3.png"
+                tags={["NEXT.JS", "TAILWIND"]}
+                link="#"
+              />
+
+              <ProjectCard
+                title="PORTFOLIO WEBSITE"
+                description="Personal portfolio built with Next.js, Tailwind, and custom pixel UI design system."
+                image="/projects/project3.png"
+                tags={["NEXT.JS", "TAILWIND"]}
+                link="#"
+              />
+              
+              <ProjectCard
+                title="PORTFOLIO WEBSITE"
+                description="Personal portfolio built with Next.js, Tailwind, and custom pixel UI design system."
+                image="/projects/project3.png"
+                tags={["NEXT.JS", "TAILWIND"]}
+                link="#"
+              />
+
+              <ProjectCard
+                title="PORTFOLIO WEBSITE"
+                description="Personal portfolio built with Next.js, Tailwind, and custom pixel UI design system."
+                image="/projects/project3.png"
+                tags={["NEXT.JS", "TAILWIND"]}
+                link="#"
+              />
+
+              <ProjectCard
+                title="PORTFOLIO WEBSITE"
+                description="Personal portfolio built with Next.js, Tailwind, and custom pixel UI design system."
+                image="/projects/project3.png"
+                tags={["NEXT.JS", "TAILWIND"]}
+                link="#"
+              />
             </div>
           </section>
         </RevealOnScroll>
